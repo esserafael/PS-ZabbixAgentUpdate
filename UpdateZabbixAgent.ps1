@@ -20,7 +20,7 @@ function UpdateZabbixAgent($UpdatedSource, $LocalDest){
 	$TimeOut = 30
 	$SecondsToWait = 5
 	Stop-Service $ServiceName -Force
-	While((Get-Service $ServiceName).Status -ne "Stopped" -or $TimePast -ge $TimeOut){		
+	While((Get-Service $ServiceName).Status -ne "Stopped" -and $TimePast -le $TimeOut){		
 		Start-Sleep -Seconds $SecondsToWait
 		$TimePast += $SecondsToWait
 	}
