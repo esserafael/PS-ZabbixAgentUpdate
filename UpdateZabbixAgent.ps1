@@ -39,7 +39,7 @@ function InstallZabbixAgent{
 	$FQDN = (Get-CimInstance Win32_ComputerSystem).DNSHostName + "." + (Get-CimInstance Win32_ComputerSystem).Domain
 	
 	$ConfigContent = Get-Content $AgentConfFile
-	$ConfigContent | % {
+	$ConfigContent | ForEach-Object {
 		if($_ -like "Hostname*"){
 			$ConfigContent[$ConfigContent.IndexOf($_)] += $FQDN
 		}
@@ -67,7 +67,7 @@ function RemSpaces($Str){
 $Dir = Split-Path ($MyInvocation.MyCommand.Path)
 $ScriptName = ((($MyInvocation.MyCommand.Name).Split("."))[0]) + ".conf"
 $ConfigFile = "$Dir\$ScriptName"
-Get-Content -Path $Configfile | % {
+Get-Content -Path $Configfile | ForEach-Object {
 	if(($_[0] -ne "#") -and ($_[0] -ne $Null)){
 		$Var = $_.Split("=")
 		$Var[0] = RemSpaces $Var[0]
@@ -82,7 +82,7 @@ Get-Content -Path $Configfile | % {
 }
 
 # Check O.S. architecture.
-if((Get-WmiObject -Class Win32_OperatingSystem).OSArchitecture -like "64*"){
+if((Get-CimInstance -Class Win32_OperatingSystem).OSArchitecture -like "64*"){
 	$UpdatedFiles = $UpdatedFiles64
 }
 else{
