@@ -36,7 +36,7 @@ function InstallZabbixAgent{
 	$TargetInstall = $env:SystemDrive + $LocalFiles
 	Copy-Item ($UpdatedFiles + "\*") $LocalFiles -Recurse -Force
 	$AgentConfFile = $LocalFiles + "\" + $ZabbixConf
-	$FQDN = (Get-WmiObject Win32_ComputerSystem).DNSHostName + "." + (Get-WmiObject Win32_ComputerSystem).Domain
+	$FQDN = (Get-CimInstance Win32_ComputerSystem).DNSHostName + "." + (Get-CimInstance Win32_ComputerSystem).Domain
 	
 	$ConfigContent = Get-Content $AgentConfFile
 	$ConfigContent | % {
