@@ -1,5 +1,7 @@
 # PS-ZabbixAgentUpdate
 
+[![CodeFactor](https://www.codefactor.io/repository/github/esserafael/ps-zabbixagentupdate/badge)](https://www.codefactor.io/repository/github/esserafael/ps-zabbixagentupdate)
+
 Powershell scripts that automatically update/install Zabbix agents on Windows Server infrastructure.
 
 ## Which does what
